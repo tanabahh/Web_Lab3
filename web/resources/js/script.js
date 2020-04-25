@@ -1,27 +1,3 @@
-const AVAILABLE_X = [-2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2];
-function clickX(x) {
-    if (x in AVAILABLE_X){
-        document.getElementById("x-input").value=x;
-    }
-    /*if (xValue.includes(x)) {
-        xValue.splice(xValue.indexOf(x), 1);
-        x = Math.min(...xValue);
-
-        if (x === Infinity) {
-            x = null;
-
-        }
-    } else {
-        if (AVAILABLE_X.indexOf(x)!=-1){
-            xValue.push(x);
-        }
-    }
-
-    if (xValue.length > 1) {
-        x = null;
-    }*/
-}
-
 let redrawGraphView = () => graphView(null);
 
 function graphView(r) {
@@ -181,7 +157,6 @@ function drawPoints(r, canvas, context) {
 
 function sendForm(x,y) {
     document.getElementById("y-input").value=y;
-    clickX(x);
     document.getElementById("sbmt").click();
 }
 

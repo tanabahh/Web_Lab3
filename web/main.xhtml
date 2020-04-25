@@ -37,7 +37,7 @@
                 <ui:repeat value="#{queryBean.availableX}" var="x">
                     <div class="checkbox">
                         <label>
-                            <h:selectBooleanCheckbox immediate="true" value="#{queryBean.alternativeX}" onchange="clickX(#{x})"/>
+                            <h:selectBooleanCheckbox immediate="true" value="#{queryBean.x[x]}"/>
                             <span>#{x}</span>
                         </label>
                     </div>
@@ -70,10 +70,6 @@
 
 
             </div>
-
-
-
-            <h:inputText style="display: none" id="x-input"  value="#{queryBean.alternativeX}"/>
 
             <span id="history-json" style="display: none;">
                 [

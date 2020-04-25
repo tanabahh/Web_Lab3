@@ -16,8 +16,8 @@ public class QueryBean implements Serializable {
 
     private HistoryBean historyBean;
 
-    private String r, y, alternativeX;
-   // private final Map<String, Boolean> x = new HashMap<>();
+    private String r, y;
+    private final Map<String, Boolean> x = new HashMap<>();
 
     private String errorMessage;
 
@@ -36,10 +36,6 @@ public class QueryBean implements Serializable {
             errorMessage = "потому что ты не ввёл Y";
             return null;
         }
-        if (alternativeX == null || alternativeX.isEmpty()) {
-            errorMessage = "потому что ты не ввёл X";
-            return null;
-        }
 
         try {
             double y = Double.parseDouble(this.y);
@@ -52,13 +48,22 @@ public class QueryBean implements Serializable {
             errorMessage = "потому что Y не число";
             return null;
         }
+        if (!x.containsValue(true)) {
+            errorMessage = "потому что ты не выбрал X";
+            return null;
+        }
 
+        if (x.values().parallelStream().filter(v -> v).count() > 1) {
+            errorMessage = "потому что ты выбрал слишком много X";
+            return null;
+        }
         if (result != null) {
             if (!result){
                 errorMessage = "потому что меня уронили:'(";
             }
             try {
-                historyBean.addQuery(new HistoryBean.Query(r, y, alternativeX, result));
+                historyBean.addQuery(new HistoryBean.Query(x.entrySet().parallelStream().filter(Map.Entry::getValue)
+                        .map(Map.Entry::getKey).findAny().orElse(null), y, r, result));
             }
             catch (SQLException ignored){}
 
@@ -68,12 +73,11 @@ public class QueryBean implements Serializable {
     }
 
     private Boolean getResult() {
+        Double x = this.x.entrySet().parallelStream()
+                .filter(Map.Entry::getValue).map(Map.Entry::getKey)
+                .map(Double::parseDouble).findAny().orElse(null);
         try {
-            System.out.println("hello");
-            Double x = this.alternativeX == null ? null : Double.parseDouble(this.alternativeX);
-            System.out.println(x);
             Double y = this.y == null ? null : Double.parseDouble(this.y);
-            System.out.println(y);
             Double r = this.r == null ? null : Double.parseDouble(this.r);
 
             if (x != null && y != null && r != null) {
@@ -107,13 +111,15 @@ public class QueryBean implements Serializable {
         this.y = y;
     }
 
+    public Map<String, Boolean> getX() {
+        return x;
+    }
+
     public String getErrorMessage() {
         return errorMessage;
     }
 
-    public boolean getHasErrorMessage() {
-        return errorMessage != null;
-    }
+    public boolean getHasErrorMessage() { return errorMessage != null; }
 
     public String[] getAvailableX() {
         return AVAILABLE_X;
@@ -121,13 +127,5 @@ public class QueryBean implements Serializable {
 
     public String[] getAvailableR() {
         return AVAILABLE_R;
-    }
-
-    public String getAlternativeX() {
-        return alternativeX;
-    }
-
-    public void setAlternativeX(String alternativeX) {
-        this.alternativeX = alternativeX;
     }
 }
