@@ -67,7 +67,7 @@
                 <h:commandButton  id="sbmt" styleClass="submit-btn" value="проверить" action="#{queryBean.mainAction}">
                     <f:ajax execute="@form" render="@form" onevent="reloadPoints()"/>
                 </h:commandButton>
-
+                <h:inputText style="display: none" id="x-input"  value="#{queryBean.alternativeR}"/>
 
             </div>
 

@@ -16,25 +16,35 @@ public class QueryBean implements Serializable {
 
     private HistoryBean historyBean;
 
-    private String r, y;
+    private String r, y, alternativeR;
     private final Map<String, Boolean> x = new HashMap<>();
 
     private String errorMessage;
 
     public QueryBean() {}
 
-    public Object rAction(String r){
-        this.r = r;
+    public Object rAction(String r) {
+        if (Objects.equals(this.r, r)) {
+            this.r = null;
+            this.alternativeR = null;
+        } else {
+            this.r = r;
+            this.alternativeR = null;
+        }
+
         return null;
     }
 
     public Object mainAction() {
-        Boolean result = getResult();
-
-        if (r == null || r.isEmpty()) {
-            errorMessage = "потому что ты не ввёл R";
-            return null;
+        if (Stream.of(AVAILABLE_R).noneMatch(r::equals)) {
+            if (alternativeR.equals("")){
+                errorMessage = "потому что ты не выбрал R";
+                return null;
+            }
+            else
+            {this.r=alternativeR;}
         }
+        Boolean result = getResult();
 
         if (y == null || y.isEmpty()) {
             errorMessage = "потому что ты не ввёл Y";
@@ -131,5 +141,12 @@ public class QueryBean implements Serializable {
 
     public String[] getAvailableR() {
         return AVAILABLE_R;
+    }
+    public String getAlternativeR() {
+        return alternativeR;
+    }
+
+    public void setAlternativeR(String alternativeR) {
+        this.alternativeR = alternativeR;
     }
 }
