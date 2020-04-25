@@ -1,0 +1,69 @@
+/*
+class - .key{}
+id - #key{}
+селектор - это формальное описание того элемента или группы к которой применяеся правило стиля
+селекторы псевдоклассов - особоее состояние для класса
+селекторы потомств A E - любой элемент E является потомком одного из A элементов (дочерним или одном из дочерних)
+селекторы дочерних элементов A > E - любой элемент прямой потомок A (:first-child - первым дочерним)
+наследование
+каскадирование
+*/
+a + b > div{
+    color: oldlace;
+}
+body {
+    margin:0px;
+    line-height: 1.42;
+    -webkit-font-smoothing: antialiased;
+    background: #87CEEB;
+    background-clip: padding-box;
+}
+
+.center-img {
+    text-align: center;
+}
+#form {width: 100%; border-collapse: separate; border-spacing: 4px; text-align: center;  background: #cbdfef;}
+th {color: #ffffff; font-weight: bold; border-radius: 4px 4px 0 0; background: #2e82c3;}
+td {color: #000080; border: 1px solid #2e82c3; border-radius: 4px; background: #cbdfef;}
+td:hover {background: #a2c3dd; transition-duration: 0.2s;}
+input:invalid{
+    border-color: #900;
+    background-color: #FDD;
+}
+
+.content{
+    background:oldlace;
+    width: 100%;
+    max-width: 1200px;
+    min-height: 100%;
+    padding: 10px;
+    margin: 0 auto;
+}
+.clock{
+    margin:0px;
+    line-height: 4;
+    -webkit-font-smoothing: antialiased;
+    background: #87CEEB;
+    background-clip: padding-box;
+}
+.header{
+    padding-left: 5pt;
+    text-align: center;
+    color:  #000080;
+    background-color: #87CEEB;
+    font: italic  12pt monospace; /*ширина каждого символа одинакова*/
+}
+.headerForGroup{
+    color: oldlace;
+}
+.button {
+    display: inline-block;
+    padding: .5em 2em;
+    outline: none;
+    border-width: 2px 0;
+    border-style: solid none;
+    background: #2e82c3;
+    border-radius: 6px;
+}
+.button:hover { background: #a2c3dd } /*при наведении*/
+.button:active { background:#000080 }

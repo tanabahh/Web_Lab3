@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF8"/>
+    <title>Лабораторная работа №3</title>
+    <h:outputScript library="js" name="script.js"/>
+    <h:outputScript library="js" name="jquery.js"/>
+    <h:outputScript library="js" name="jquery.validate.js"/>
+    <h:outputScript library="js" name="persistent-checkboxes.js"/>
+    <h:outputScript library="js" name="additional-methods.js"/>
+    <link type="text/css" id="styles" rel="stylesheet" href='#{resource["css/style.css"]}'/>
+</h:head>
+
+
+<h:body>
+
+    <h:link styleClass="hyperlink" value="Мне больше нравится другая страничка" outcome="index"/>
+    <div class="content">
+        Введите координаты:
+
+        <div id="errors"><h:outputText id="errors-text" value="#{queryBean.errorMessage}"/></div>
+
+        <h:form prependId="false">
+
+
+            <div id="x-panel">
+                <label>Координата X:</label><br/>
+
+                <ui:repeat value="#{queryBean.availableX}" var="x">
+                    <div class="checkbox">
+                        <label>
+                            <h:selectBooleanCheckbox immediate="true" value="#{queryBean.alternativeX}" onchange="clickX(#{x})"/>
+                            <span>#{x}</span>
+                        </label>
+                    </div>
+                </ui:repeat>
+            </div>
+
+            <div id="panel">
+                <div id="y-panel">
+                    <h:outputLabel value="Координата Y: "/><br/>
+                    <h:inputText id="y-input" value="#{queryBean.y}"/>
+                </div>
+
+
+                <div id="r-panel">
+                    <h:outputLabel value="Радиус:"/>
+                    <h:inputHidden immediate="true" value="#{queryBean.r}"/>
+                    <ui:repeat value="#{queryBean.availableR}" var="r">
+                        <h:commandButton styleClass="r-button#{r.equals(queryBean.r) ? ' r-button-selected' : ''}"
+                                         value="#{r}">
+                            <f:ajax execute="@form" immediate="true" render="@none" onevent="graphView(#{r})"/>
+                        </h:commandButton>
+                    </ui:repeat>
+                </div>
+
+
+
+                <h:commandButton  id="sbmt" styleClass="submit-btn" value="проверить" action="#{queryBean.mainAction}">
+                    <f:ajax execute="@form" render="@form" onevent="reloadPoints()"/>
+                </h:commandButton>
+
+
+            </div>
+
+
+
+            <h:inputText style="display: none" id="x-input"  value="#{queryBean.alternativeX}"/>
+
+            <span id="history-json" style="display: none;">
+                [
+
+                <ui:repeat value="#{historyBean.queries}" var="query" varStatus="status">
+                    {"x": "#{query.x}", "y": "#{query.y}", "r": "#{query.r}", "result": #{query.result}}
+
+                    <h:outputText rendered="#{!status.last}" value=","/>
+                </ui:repeat>
+
+                ]
+            </span>
+
+            <div id="canv"><canvas height="400" width="400" id="graph" class="graph"></canvas></div>
+
+            <h:dataTable styleClass="history-table" rendered="#{not empty historyBean.queries}"
+                         value="#{historyBean.queriesDescending}" var="query">
+                <h:column>
+                    <f:facet name="header">X</f:facet>
+
+                    #{query.x}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Y</f:facet>
+
+                    #{query.y}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">R</f:facet>
+
+                    #{query.r}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">вывод</f:facet>
+
+                    #{query.result ? "жизнь продолжается" : "смысл жизни не найден"}
+                </h:column>
+            </h:dataTable>
+        </h:form>
+
+        <script type="text/javascript">
+            document.body.onload = () => reloadPoints();
+        </script>
+    </div>
+</h:body>
+
+</html>
