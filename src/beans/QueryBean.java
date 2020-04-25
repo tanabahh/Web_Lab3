@@ -23,6 +23,10 @@ public class QueryBean implements Serializable {
 
     public QueryBean() {}
 
+    public Object rAction(String r){
+        this.r = r;
+        return null;
+    }
 
     public Object mainAction() {
         Boolean result = getResult();

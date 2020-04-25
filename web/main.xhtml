@@ -56,7 +56,7 @@
                     <h:inputHidden immediate="true" value="#{queryBean.r}"/>
                     <ui:repeat value="#{queryBean.availableR}" var="r">
                         <h:commandButton styleClass="r-button#{r.equals(queryBean.r) ? ' r-button-selected' : ''}"
-                                         value="#{r}">
+                                         value="#{r}" action="#{queryBean.rAction(r)}">
                             <f:ajax execute="@form" immediate="true" render="@none" onevent="graphView(#{r})"/>
                         </h:commandButton>
                     </ui:repeat>
