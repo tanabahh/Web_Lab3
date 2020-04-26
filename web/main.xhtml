@@ -57,7 +57,7 @@
                     <ui:repeat value="#{queryBean.availableR}" var="r">
                         <h:commandButton styleClass="r-button#{r.equals(queryBean.r) ? ' r-button-selected' : ''}"
                                          value="#{r}" action="#{queryBean.rAction(r)}">
-                            <f:ajax execute="@form" immediate="true" render="@none" onevent="graphView(#{r})"/>
+                            <f:ajax execute="@form" immediate="true" render="r-input" onevent="graphView(#{r})"/>
                         </h:commandButton>
                     </ui:repeat>
                 </div>
@@ -67,7 +67,7 @@
                 <h:commandButton  id="sbmt" styleClass="submit-btn" value="проверить" action="#{queryBean.mainAction}">
                     <f:ajax execute="@form" render="@form" onevent="reloadPoints()"/>
                 </h:commandButton>
-                <h:inputText style="display: none" id="x-input"  value="#{queryBean.alternativeR}"/>
+                <h:inputText style="display: none" id="r-input"  value="#{queryBean.r}"/>
 
             </div>
 
@@ -84,6 +84,16 @@
             </span>
 
             <div id="canv"><canvas height="400" width="400" id="graph" class="graph"></canvas></div>
+
+            <h:form id="areaForm" prependId="false">
+                <h:inputText id="areaXField" value="#{queryBean.x}"/>
+
+                <h:inputText id="areaYField" value="#{queryBean.y}"/>
+
+                <h:inputText id="areaRField" value="#{queryBean.r}"/>
+
+                <h:commandButton id="areaFormButton" action="#{queryBean.formAction}" onevent="reloadPoints()"/>
+            </h:form>
 
             <h:dataTable styleClass="history-table" rendered="#{not empty historyBean.queries}"
                          value="#{historyBean.queriesDescending}" var="query">
