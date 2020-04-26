@@ -11,30 +11,30 @@ function graphView(r) {
     context.beginPath();
     context.rect(0.5*width, 0.04*height, 0.46*width, 0.46*height);
     context.closePath();
-    context.strokeStyle = "yellow";
-    context.fillStyle = "yellow";
+    context.strokeStyle = "dodgerblue";
+    context.fillStyle = "dodgerblue";
     context.fill();
     context.stroke();
 
 // сектор
     context.beginPath();
     context.moveTo(0.5*width, 0.5*height);
-    context.arc(0.5*width, 0.5*height, 0.46*height, Math.PI , 3*Math.PI / 2);
+    context.arc(0.5*width, 0.5*height, 0.23*height, 2*Math.PI , 5*Math.PI / 2);
     context.closePath();
-    context.strokeStyle = "yellow";
-    context.fillStyle = "yellow";
+    context.strokeStyle = "dodgerblue";
+    context.fillStyle = "dodgerblue";
     context.fill();
     context.stroke();
 
 //треугольник
     context.beginPath();
     context.moveTo(0.5*width, 0.5*height);
-    context.lineTo(0.73*width, 0.5*height);
-    context.lineTo(0.5*width, 0.96*height);
+    context.lineTo(0.04*width, 0.5*height);
+    context.lineTo(0.5*width, 0.73*height);
     context.lineTo(0.5*width, 0.5*height);
     context.closePath();
-    context.strokeStyle = "yellow";
-    context.fillStyle = "yellow";
+    context.strokeStyle = "dodgerblue";
+    context.fillStyle = "dodgerblue";
     context.fill();
     context.stroke();
 
@@ -90,6 +90,7 @@ function graphView(r) {
     context.closePath();
     context.strokeStyle = "black";
     context.fillStyle = "black";
+    context.stroke();
     drawPoints(r, canvas, context);
     redrawGraphView = () => graphView(r);
 
@@ -106,7 +107,7 @@ function graphView(r) {
             let zoomY = height*0.46 / r;
 
             sendForm((visualX - centerX) / zoomX,
-                (centerY - visualY) / zoomY);
+                (centerY - visualY) / zoomY, r);
         };
     }
 }
@@ -120,9 +121,9 @@ function reloadPoints() {
 }
 
 const correctPawImage = new Image();
-correctPawImage.src = 'resources/img/correctPaw.png';
+correctPawImage.src = 'resources/img/true.png';
 const wrongPawImage = new Image();
-wrongPawImage.src = 'resources/img/wrongPaw.png';
+wrongPawImage.src = 'resources/img/false.png';
 function drawPoints(r, canvas, context) {
     const centerX = 250;
     const centerY = 250;
@@ -155,9 +156,11 @@ function drawPoints(r, canvas, context) {
     }
 }
 
-function sendForm(x,y) {
-    document.getElementById("y-input").value=y;
-    document.getElementById("sbmt").click();
+function sendForm(x,y,r) {
+    document.getElementById("areaXField").value=x;
+    document.getElementById("areaYField").value=y;
+    document.getElementById("areaRField").value=r;
+    document.getElementById("areaFormButton").click();
 }
 
 

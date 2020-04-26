@@ -22,14 +22,15 @@ body {
 .center-img {
     text-align: center;
 }
-#form {width: 100%; border-collapse: separate; border-spacing: 4px; text-align: center;  background: #cbdfef;}
-th {color: #ffffff; font-weight: bold; border-radius: 4px 4px 0 0; background: #2e82c3;}
-td {color: #000080; border: 1px solid #2e82c3; border-radius: 4px; background: #cbdfef;}
-td:hover {background: #a2c3dd; transition-duration: 0.2s;}
-input:invalid{
-    border-color: #900;
-    background-color: #FDD;
+table{
+    width: 70%;
+    border: 1px #000080;
+    margin: auto;
 }
+table.history-table th {color: #ffffff; font-weight: bold; border-radius: 4px 4px 0 0; background: #2e82c3;}
+table.history-table td {color: #000080; border: 1px solid #2e82c3; border-radius: 4px; background: #cbdfef;}
+table.history-table td:hover {background: #a2c3dd; transition-duration: 0.2s;}
+
 
 .content{
     background:oldlace;
@@ -38,6 +39,8 @@ input:invalid{
     min-height: 100%;
     padding: 10px;
     margin: 0 auto;
+    color: #000080;
+    font: italic  12pt monospace;
 }
 .clock{
     margin:0px;
@@ -56,14 +59,60 @@ input:invalid{
 .headerForGroup{
     color: oldlace;
 }
+
+.submit-btn{
+    margin: 15px;
+    padding: 5px;
+    color: #000080;
+    border: 1px solid #2e82c3;
+    border-radius: 4px;
+    background: #cbdfef;
+}
+.submit-btn.hover{
+    background: #a2c3dd;
+    transition-duration: 0.2s;
+}
+.r-button{
+    color: #000080;
+    border: 1px solid #2e82c3;
+    border-radius: 4px;
+    background: #cbdfef;
+}
+input.r-button-selected {
+    background: #a2c3dd;
+    transition-duration: 0.2s;
+}
 .button {
-    display: inline-block;
-    padding: .5em 2em;
-    outline: none;
-    border-width: 2px 0;
-    border-style: solid none;
-    background: #2e82c3;
-    border-radius: 6px;
+    text-align: center;
+    margin: 15px;
+    padding: 5px;
+    color: #000080;
+    border: 1px solid #2e82c3;
+    border-radius: 4px;
+    background: #cbdfef;
 }
 .button:hover { background: #a2c3dd } /*при наведении*/
 .button:active { background:#000080 }
+
+.clock{
+    margin: 15px 25px;
+    padding: 15px 20px;
+    color: #ffffff;
+    text-align: center;
+    font: italic  20pt monospace;
+    background: #2e82c3;
+}
+#errors{
+    margin: 15px 25px;
+    padding: 15px 20px;
+    color: #ffffff;
+    text-align: center;
+    font: italic  12pt monospace;
+    background: #2e82c3;
+}
+#count{
+    padding-left: 5pt;
+    color: #000080;
+    text-align: center;
+    font: italic  12pt monospace;
+}
