@@ -96,7 +96,6 @@ function graphView(r) {
 
     if (r != null) {
         canvas.onclick = (event) => {
-            //alert("onclick");
             const rect = canvas.getBoundingClientRect();
             const visualX = Math.floor(event.clientX - rect.left);
             const visualY = Math.floor(event.clientY - rect.top);
@@ -120,10 +119,10 @@ function reloadPoints() {
     graphView(null)
 }
 
-const correctPawImage = new Image();
-correctPawImage.src = 'resources/img/true.png';
-const wrongPawImage = new Image();
-wrongPawImage.src = 'resources/img/false.png';
+const correctImage = new Image();
+correctImage.src = 'resources/img/true.png';
+const wrongImage = new Image();
+wrongImage.src = 'resources/img/false.png';
 function drawPoints(r, canvas, context) {
     const centerX = 250;
     const centerY = 250;
@@ -132,7 +131,7 @@ function drawPoints(r, canvas, context) {
         const visualX = centerX + point.x * zoomX;
         const visualY = centerY - point.y * zoomY;
 
-        context.drawImage(point.result ? correctPawImage : wrongPawImage, visualX - 15, visualY - 15, 30, 30);
+        context.drawImage(point.result ? correctImage : wrongImage, visualX - 15, visualY - 15, 30, 30);
     }
 
     if (r != null) {
