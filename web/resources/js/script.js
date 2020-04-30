@@ -96,7 +96,7 @@ function graphView(r) {
 
     if (r != null) {
         canvas.onclick = (event) => {
-            alert("onclick");
+            //alert("onclick");
             const rect = canvas.getBoundingClientRect();
             const visualX = Math.floor(event.clientX - rect.left);
             const visualY = Math.floor(event.clientY - rect.top);

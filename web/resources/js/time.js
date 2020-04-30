@@ -8,10 +8,6 @@
     let secTime;
     let ticker;
 
-    //function getRandomColor() {
-      //  return '#' + Math.floor(Math.random() * 16777215).toString(16);
-    //}
-
     function clock() {
         let date = new Date();
         let hours = date.getHours();
@@ -32,15 +28,7 @@
         setTimeout(clock, 12000);
     }
 
-    //function changeClockColor() {
-      //  clockHours.style.color = getRandomColor();
-        //clockMinutes.style.color = getRandomColor();
-        //clockSeconds.style.color = getRandomColor();
-        //setTimeout(changeClockColor, 1000);
-    //}
-
     clock();
-    //changeClockColor();
     getSeconds();
 
     function getSeconds() {
@@ -51,7 +39,7 @@
     function startTimer(secs) {
         secTime = parseInt(secs);
         ticker = setInterval(tick,1000);
-        tick(); //initial count display
+        tick();
     }
 
     function tick() {
@@ -60,7 +48,7 @@
             secTime--;
         } else {
             clearInterval(ticker);
-            getSeconds(); //start over
+            getSeconds();
         }
         count.innerText = ((secs < 10) ? "0" : "") + secs;
     }
